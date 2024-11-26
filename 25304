@@ -1,0 +1,17 @@
+int main() {
+    int X;
+    int N;
+    int a, b;
+    scanf("%d", &X);
+    scanf("%d", &N);
+    
+    for (int i = 1; i <= N; i++)
+    {scanf("%d %d", &a, &b);
+    X-= a*b;
+    }
+    if (X ==0)
+        printf("Yes");
+    else
+        printf("No");
+    return 0;
+}
