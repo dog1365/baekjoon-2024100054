@@ -1,0 +1,33 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <math.h>
+#include "room.h"
+
+void addPlayerToRoom(Info player, int m) {
+    int added = 0;
+    for (int j = 0; j < roomCount && !added; j++) {
+        if (rooms[j].count < m && abs(rooms[j].players[0].level - player.level) <= 10) {
+            rooms[j].players[rooms[j].count++] = player;
+            added = 1;
+        }
+    }
+    if (!added) {
+        rooms[roomCount].players[0] = player;
+        rooms[roomCount++].count = 1;
+    }
+}
+
+int comparePlayers(const void* a, const void* b) {
+    return strcmp(((Info*)a)->name, ((Info*)b)->name);
+}
+
+void printRooms(int m) {
+    for (int i = 0; i < roomCount; i++) {
+        printf("%s\n", rooms[i].count >= m ? "Started!" : "Waiting!");
+        qsort(rooms[i].players, rooms[i].count, sizeof(Info), comparePlayers);
+        for (int j = 0; j < rooms[i].count; j++) {
+            printf("%d %s\n", rooms[i].players[j].level, rooms[i].players[j].name);
+        }
+    }
+}
