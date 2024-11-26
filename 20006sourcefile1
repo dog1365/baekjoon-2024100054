@@ -1,0 +1,19 @@
+#include <stdio.h>
+#include "room.h"
+
+Room rooms[MAX_ROOMS];
+int roomCount = 0;
+
+int main() {
+    int p, m;
+    scanf_s("%d %d", &p, &m);
+
+    for (int i = 0; i < p; i++) {
+        Info player;
+        scanf_s("%d %s", &player.level, player.name);
+        addPlayerToRoom(player, m);
+    }
+
+    printRooms(m);
+    return 0;
+}
