@@ -1,0 +1,24 @@
+#ifndef ROOM_H
+#define ROOM_H
+
+#define MAX_PLAYERS 300
+#define MAX_ROOMS 501
+#define MAX_NAME_LENGTH 17
+
+typedef struct {
+    char name[MAX_NAME_LENGTH];
+    int level;
+} Info;
+
+typedef struct {
+    Info players[MAX_PLAYERS];
+    int count;
+} Room;
+
+extern Room rooms[MAX_ROOMS];
+extern int roomCount;
+
+void addPlayerToRoom(Info player, int maxPlayersPerRoom);
+void printRooms(int maxPlayersPerRoom);
+
+#endif
