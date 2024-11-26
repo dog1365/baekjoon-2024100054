@@ -1,0 +1,36 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#define MAX_PLAYERS 300
+#define MAX_ROOMS 501
+#define MAX_NAME_LENGTH 17
+typedef struct { char name[MAX_NAME_LENGTH]; int level; } Info;
+typedef struct { Info players[MAX_PLAYERS]; int count; } Room;
+Room rooms[MAX_ROOMS];
+int roomCount = 0;
+int comparePlayers(const void *a, const void *b) {
+    return strcmp(((Info*)a)->name, ((Info*)b)->name);
+}
+int main() {
+    int p, m;
+    scanf("%d %d", &p, &m);
+    for (int i = 0; i < p; i++) {
+        Info player;
+        int added = 0;
+        scanf("%d %s", &player.level, player.name);
+        for (int j = 0; j < roomCount && !added; j++) {
+            if (rooms[j].count < m && abs(rooms[j].players[0].level - player.level) <= 10) {
+                rooms[j].players[rooms[j].count++] = player;
+                added = 1;
+            }
+        }
+        if (!added) rooms[roomCount].players[0] = player, rooms[roomCount++].count = 1;
+    }
+    for (int i = 0; i < roomCount; i++) {
+        printf("%s\n", rooms[i].count >= m ? "Started!" : "Waiting!");
+        qsort(rooms[i].players, rooms[i].count, sizeof(Info), comparePlayers);
+        for (int j = 0; j < rooms[i].count; j++) 
+            printf("%d %s\n", rooms[i].players[j].level, rooms[i].players[j].name);
+    }
+    return 0;
+}
