@@ -1,0 +1,22 @@
+#define CANVAS_SIZE 100
+#define PAPER_SIZE 10
+int main() {
+    int n, x, y, black_area = 0;
+    int canvas[CANVAS_SIZE][CANVAS_SIZE] = {0};
+    scanf("%d", &n);
+    for (int i = 0; i < n; i++) {
+        scanf("%d %d", &x, &y);       
+        for (int j = 0; j < PAPER_SIZE; j++) {
+            for (int k = 0; k < PAPER_SIZE; k++) {
+                canvas[x + j][y + k] = 1;
+            }
+        }
+    }
+    for (int i = 0; i < CANVAS_SIZE; i++) {
+        for (int j = 0; j < CANVAS_SIZE; j++) {
+            black_area += canvas[i][j];
+        }
+    }
+    printf("%d\n", black_area);
+    return 0;
+}
