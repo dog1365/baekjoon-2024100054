@@ -1,0 +1,6 @@
+int main() {
+    char ch;
+    scanf("%s", &ch);
+    printf("%d", (int)ch);
+    return 0;
+}
