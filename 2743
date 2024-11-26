@@ -1,6 +1,6 @@
 int main() {
-    char ch;
-    scanf("%s", &ch);
-    printf("%d", (int)ch);
+    char word[101];
+    scanf("%s", &word);
+    printf("%d", strlen(word));
     return 0;
 }
